@@ -1,7 +1,7 @@
 <template>
     <div>
         <img alt="Vue logo" src="./assets/logo.png">
-        <cky-page></cky-page>
+        <cky-page message="666"></cky-page>
     </div>
 
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
