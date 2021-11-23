@@ -3,9 +3,12 @@
         <el-row :[pageConfig.mode]="pageConfig[pageConfig.mode]" :gutter="pageConfig.gutter">
             <el-col :span="pageItem.width" :key="filId" v-for="(pageItem,filId) in computedPageDesc">
                 <component
-                    :is="`${pageItem.type}`"
-                    v-model="pageConfig.pageData[filId]"
-                >
+                    :is="`c-${pageItem.type}`"
+                    :classed="pageItem.class"
+                    :style="pageItem.style"
+                    v-model:value="pageConfig.pageData[filId]"
+                    :slots="pageItem.slots"
+                    :attrs="pageItem.attrs">
                 </component>
             </el-col>
         </el-row>

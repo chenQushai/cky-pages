@@ -22,17 +22,28 @@
                         key: '哈哈哈',
                         key1: "66",
                     },
-                    pageDesc:{
+                    pageDesc: {
                         key: {
-                            type: 'el-input',
+                            type: 'input',
                             width: 6,
+                            attrs: {
+                                size: "mini",
+                            },
+                            slots: {
+                                append(h) {
+                                    return h(<el-select/>,{},[
+                                        h(<el-option label="Restaurant" value="1"/>),
+                                        h(<el-option label="Order No." value="2"/>)
+                                    ])
+                                }
+                            }
                         },
                         key1: {
-                            type: 'el-input',
+                            type: 'input',
                             width: 6,
                         }
                     },
-                    order: ['key1','key']
+                    order: ['key', 'key1']
                 }
             }
         },
