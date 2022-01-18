@@ -6,6 +6,7 @@
 
 <script>
     import HelloWorld from './components/HelloWorld.vue'
+
     export default {
         name: 'App',
         components: {
@@ -21,6 +22,9 @@
                     pageData: {
                         key: '哈哈哈',
                         key1: "66",
+                        key5: '66',
+                        key7: '999',
+                        key9: '子集'
                     },
                     pageDesc: {
                         key: {
@@ -31,19 +35,73 @@
                             },
                             slots: {
                                 append(h) {
-                                    return h(<el-select/>,{},[
-                                        h(<el-option label="Restaurant" value="1"/>),
-                                        h(<el-option label="Order No." value="2"/>)
-                                    ])
+                                    return (<el-select></el-select>)
                                 }
                             }
                         },
                         key1: {
                             type: 'input',
                             width: 6,
+                        },
+                        key2: {
+                            type: 'row',
+                            width: 24,
+                            attrs: {},
+                            style: {
+                                minHeight: '80px',
+                                border: '1px solid red'
+                            },
+                            children: {
+                                key5: {
+                                    type: 'row',
+                                    width: 12,
+                                    attrs: {
+
+                                        style: {
+                                            width: '300px',
+                                            minHeight: '20px',
+                                            backgroundColor: 'blue'
+                                        }
+                                    },
+                                    children: {
+                                        key6: {
+                                            type: 'col',
+                                            attrs: {
+                                                span: 6,
+                                            },
+                                            style: {
+                                                minHeight: '20px',
+                                                backgroundColor: 'green'
+                                            },
+                                        },
+                                        key9: {
+                                            type: 'input',
+                                            attrs: {
+                                                size: "mini",
+                                            },
+                                            on: {
+                                                change: (val) => {
+                                                    console.log(val)
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+
+
+                        },
+                        key7: {
+                            type: 'input',
+                            width: 6,
+                            attrs: {
+                                size: "mini",
+                            },
+
                         }
                     },
-                    order: ['key', 'key1']
+                    order: ['key', 'key1', 'key2', 'key7']
                 }
             }
         },

@@ -8,7 +8,9 @@
                     :style="pageItem.style"
                     v-model:value="pageConfig.pageData[filId]"
                     :slots="pageItem.slots"
-                    :attrs="pageItem.attrs">
+                    :attrs="pageItem.attrs"
+                    :on="pageItem.on ? pageItem.on : {}"
+                    :children="pageItem.children">
                 </component>
             </el-col>
         </el-row>
@@ -16,7 +18,7 @@
 </template>
 
 <script setup>
-    import {defineProps, computed, toRefs} from 'vue'
+    import {defineProps, computed, provide, ref, reactive} from 'vue'
     import pageConfigDefault from '../config/pageConfig'
 
     const props = defineProps({
@@ -25,7 +27,8 @@
             default: () => pageConfigDefault
         }
     });
-
+    //向所有子组件提供页面数据，并且是响应式
+    provide('pageData',reactive(props.pageConfig.pageData));
     // 计算排序后的pageDesc
     const computedPageDesc = computed(() => {
         let orderPageDesc = {};//排序后的页面描述
@@ -45,6 +48,8 @@
             return orderPageDesc
         }
     });
+
+
 </script>
 
 <style lang="scss" scoped>

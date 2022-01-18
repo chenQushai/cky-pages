@@ -5,6 +5,7 @@
         v-model="value"
         @input="emitData"
         v-bind="attrs"
+        v-on="on"
     >
         <template v-for="(render, key) of slots" #[key]>
             <extend-slot :key="key" :render="render" />
@@ -21,6 +22,7 @@
         },
         attrs: {
             type: Object,
+            default: () => {}
         },
         classed: {
             type: [Object, Array],
@@ -31,6 +33,10 @@
             default: () => {}
         },
         slots: {
+            type: Object,
+            default: () => {}
+        },
+        on: {
             type: Object,
             default: () => {}
         }
