@@ -1,8 +1,10 @@
 <template>
     <div>
         <el-row :[pageConfig.mode]="pageConfig[pageConfig.mode]" :gutter="pageConfig.gutter">
-            <el-col :span="pageItem.width" :key="filId" v-for="(pageItem,filId) in computedPageDesc">
+            <!--<el-col :span="pageItem.width" :key="filId" v-for="(pageItem,filId) in computedPageDesc">-->
                 <component
+                    :key="filId"
+                    v-for="(pageItem,filId) in computedPageDesc"
                     :is="`c-${pageItem.type}`"
                     :classed="pageItem.class"
                     :style="pageItem.style"
@@ -12,7 +14,7 @@
                     :on="pageItem.on ? pageItem.on : {}"
                     :children="pageItem.children">
                 </component>
-            </el-col>
+            <!--</el-col>-->
         </el-row>
     </div>
 </template>

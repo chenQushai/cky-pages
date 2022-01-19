@@ -15,7 +15,7 @@
         data() {
             return {
                 pageConfig: {
-                    mode: 'justify',//排列方式
+                    mode: '',//排列方式
                     justify: 'center',//默认采用flex对齐方式
                     align: 'middle',
                     gutter: 10,//块间距
@@ -23,85 +23,59 @@
                         key: '哈哈哈',
                         key1: "66",
                         key5: '66',
-                        key7: '999',
+                        key7: [],
                         key9: '子集'
                     },
                     pageDesc: {
+                        pageStyle: { //配置页面整体的样式
+
+                        },
                         key: {
                             type: 'input',
-                            width: 6,
                             attrs: {
                                 size: "mini",
                             },
-                            slots: {
-                                append(h) {
-                                    return (<el-select></el-select>)
-                                }
-                            }
+                            style: {
+                                width: '176px'
+                            },
                         },
                         key1: {
                             type: 'input',
                             width: 6,
                         },
-                        key2: {
-                            type: 'row',
-                            width: 24,
-                            attrs: {},
-                            style: {
-                                minHeight: '80px',
-                                border: '1px solid red'
-                            },
-                            children: {
-                                key5: {
-                                    type: 'row',
-                                    width: 12,
-                                    attrs: {
-
-                                        style: {
-                                            width: '300px',
-                                            minHeight: '20px',
-                                            backgroundColor: 'blue'
-                                        }
-                                    },
-                                    children: {
-                                        key6: {
-                                            type: 'col',
-                                            attrs: {
-                                                span: 6,
-                                            },
-                                            style: {
-                                                minHeight: '20px',
-                                                backgroundColor: 'green'
-                                            },
-                                        },
-                                        key9: {
-                                            type: 'input',
-                                            attrs: {
-                                                size: "mini",
-                                            },
-                                            on: {
-                                                change: (val) => {
-                                                    console.log(val)
-                                                }
-                                            }
-
-                                        }
-                                    }
-                                }
-                            }
-
-
-                        },
                         key7: {
-                            type: 'input',
-                            width: 6,
+                            type: 'cascader',
                             attrs: {
                                 size: "mini",
+                                filterable: true,
+                                options: [
+                                    {
+                                        value: 'guide',
+                                        label: 'Guide',
+                                        disabled: true,
+                                    },
+                                    {
+                                        value: 'navigation',
+                                        label: 'Navigation',
+                                        children: [
+                                            {
+                                                value: 'side nav',
+                                                label: 'Side Navigation',
+                                            },
+                                            {
+                                                value: 'top nav',
+                                                label: 'Top Navigation',
+                                            },
+                                        ],
+                                    }
+                                ],
                             },
-
+                            style: {
+                                marginTop: '8px'
+                            },
                         }
                     },
-                    order: ['key', 'key1', 'key2', 'key7']
+                    order: ['key', 'key1', 'key7']
                 }
             }
         },

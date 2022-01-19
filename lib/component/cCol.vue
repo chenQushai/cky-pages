@@ -21,7 +21,8 @@
     import renderChildItem from '../renderChildItem'
     const props = defineProps({
         attrs: {
-            type: Object
+            type: Object,
+            default: () => {}
         },
         slots: {
             type: Object,
@@ -29,7 +30,7 @@
             }
         },
         style: {
-            type: Object,
+            type: [Object, Array],
             default: () => {}
         },
         classed: {

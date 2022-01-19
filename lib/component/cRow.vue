@@ -31,7 +31,7 @@
             }
         },
         style: {
-            type: Object,
+            type: [Object, Array],
             default: () => {}
         },
         classed: {
