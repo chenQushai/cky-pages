@@ -6,7 +6,7 @@
 
 <script>
     import HelloWorld from './components/HelloWorld.vue'
-
+    import {getCurrentInstance,inject} from 'vue'
     export default {
         name: 'App',
         components: {
@@ -23,13 +23,14 @@
                         key: '哈哈哈',
                         key1: "66",
                         key5: '66',
+                        key6: '',
                         key7: [],
                         key9: '子集'
                     },
-                    pageDesc: {
-                        pageStyle: { //配置页面整体的样式
+                    childrenInstance: {
 
-                        },
+                    },
+                    pageDesc: {
                         key: {
                             type: 'input',
                             attrs: {
@@ -38,45 +39,53 @@
                             style: {
                                 width: '176px'
                             },
+
                         },
                         key1: {
                             type: 'input',
-                            width: 6,
                         },
-                        key7: {
-                            type: 'cascader',
-                            ref: 'yy',
-                            attrs: {
-                                size: "mini",
-                                filterable: true,
-                                options: [
-                                    {
-                                        value: 'guide',
-                                        label: 'Guide',
-                                        disabled: true,
-                                    },
-                                    {
-                                        value: 'navigation',
-                                        label: 'Navigation',
-                                        children: [
-                                            {
-                                                value: 'side nav',
-                                                label: 'Side Navigation',
-                                            },
-                                            {
-                                                value: 'top nav',
-                                                label: 'Top Navigation',
-                                            },
-                                        ],
-                                    }
-                                ],
-                            },
+                        key6: {
+                            type: 'row',
                             style: {
-                                marginTop: '8px'
+                                minHeight: '80px'
                             },
-                        }
+                            children: {
+                                key7: {
+                                    type: 'cascader',
+                                    ref: 'yy',
+                                    attrs: {
+                                        size: "mini",
+                                        filterable: true,
+                                        options: [
+                                            {
+                                                value: 'guide',
+                                                label: 'Guide',
+                                                disabled: true,
+                                            },
+                                            {
+                                                value: 'navigation',
+                                                label: 'Navigation',
+                                                children: [
+                                                    {
+                                                        value: 'side nav',
+                                                        label: 'Side Navigation',
+                                                    },
+                                                    {
+                                                        value: 'top nav',
+                                                        label: 'Top Navigation',
+                                                    },
+                                                ],
+                                            }
+                                        ],
+                                    },
+                                    style: {
+                                        marginTop: '8px'
+                                    },
+                                }
+                            }
+                        },
                     },
-                    order: ['key', 'key1', 'key7']
+                    order: ['key', 'key1', 'key6'],//排序只针对与最外层同级元素
                 }
             }
         },
@@ -90,7 +99,7 @@
         },
         mounted() {
             //拿到了实例方法
-            console.log(this.$refs.page.$refs.key7.getCheckedNodes())
+            console.log(this.pageConfig.childrenInstance)
         }
     }
 </script>

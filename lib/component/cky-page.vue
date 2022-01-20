@@ -3,7 +3,7 @@
         <el-row :[pageConfig.mode]="pageConfig[pageConfig.mode]" :gutter="pageConfig.gutter">
             <!--<el-col :span="pageItem.width" :key="filId" v-for="(pageItem,filId) in computedPageDesc">-->
             <component
-                :ref="filId"
+                ref="instance"
                 :key="filId"
                 v-for="(pageItem,filId) in computedPageDesc"
                 :is="`c-${pageItem.type}`"
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-    import {defineProps, computed, provide, ref, reactive} from 'vue'
+    import {defineProps, computed, provide, ref, reactive, onMounted} from 'vue'
     import pageConfigDefault from '../config/pageConfig'
 
     const props = defineProps({
@@ -32,26 +32,36 @@
     });
     //向所有子组件提供页面数据，并且是响应式
     provide('pageData', reactive(props.pageConfig.pageData));
+    provide('pageConfig', reactive(props.pageConfig));
+    //定义组件实例
+    const instance = ref(null);
     // 计算排序后的pageDesc
     const computedPageDesc = computed(() => {
         let orderPageDesc = {};//排序后的页面描述
         if (props.pageConfig.order && props.pageConfig.order.length) { //如果有order
             props.pageConfig.order.forEach((filId) => {
                 if (props.pageConfig.pageDesc[filId]) {
-                    Reflect.set(orderPageDesc, filId, props.pageConfig.pageDesc[filId])
+                    Reflect.set(orderPageDesc, filId, props.pageConfig.pageDesc[filId]);
+                    //添加当前组件实例将自动暴漏给外层，以便外层使用组件实例
+                    Reflect.set(props.pageConfig.childrenInstance, filId, instance)
                 }
                 else {
                     throw new Error('order中定义的key在pageDesc中不存在')
                 }
             });
+
             return orderPageDesc
         }
         else { //无order按照原来序列排列
+
+            //添加当前组件实例,将自动暴漏给外层，以便外层使用组件实例
             orderPageDesc = props.pageConfig.pageDesc;
-            return orderPageDesc
+            for (let key in orderPageDesc) {
+                Reflect.set(props.pageConfig.childrenInstance, key, instance)
+            }
+                return orderPageDesc
         }
     });
-
 </script>
 
 <style lang="scss" scoped>

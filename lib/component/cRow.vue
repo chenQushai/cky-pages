@@ -10,8 +10,7 @@
             :key="filId"
             v-for="(c,filId) of children"
             :config="c"
-            :filId="filId"
-        >
+            :filId="filId">
         </renderChildItem>
     </el-row>
 </template>
@@ -42,9 +41,9 @@
             type: Object,
             default: () => {}
         }
-    })
-</script>
+    });
 
+</script>
 <style scoped>
 
 </style>
