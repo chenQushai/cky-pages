@@ -1,6 +1,6 @@
 <template>
     <!--<img alt="Vue logo" src="./assets/logo.png">-->
-    <cky-page :pageConfig="pageConfig"></cky-page>
+    <cky-page ref="page" :pageConfig="pageConfig"></cky-page>
     <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
 </template>
 
@@ -45,6 +45,7 @@
                         },
                         key7: {
                             type: 'cascader',
+                            ref: 'yy',
                             attrs: {
                                 size: "mini",
                                 filterable: true,
@@ -86,6 +87,10 @@
                 },
                 deep: true
             }
+        },
+        mounted() {
+            //拿到了实例方法
+            console.log(this.$refs.page.$refs.key7.getCheckedNodes())
         }
     }
 </script>

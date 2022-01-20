@@ -2,18 +2,19 @@
     <div>
         <el-row :[pageConfig.mode]="pageConfig[pageConfig.mode]" :gutter="pageConfig.gutter">
             <!--<el-col :span="pageItem.width" :key="filId" v-for="(pageItem,filId) in computedPageDesc">-->
-                <component
-                    :key="filId"
-                    v-for="(pageItem,filId) in computedPageDesc"
-                    :is="`c-${pageItem.type}`"
-                    :classed="pageItem.class"
-                    :style="pageItem.style"
-                    v-model:value="pageConfig.pageData[filId]"
-                    :slots="pageItem.slots"
-                    :attrs="pageItem.attrs"
-                    :on="pageItem.on ? pageItem.on : {}"
-                    :children="pageItem.children">
-                </component>
+            <component
+                :ref="filId"
+                :key="filId"
+                v-for="(pageItem,filId) in computedPageDesc"
+                :is="`c-${pageItem.type}`"
+                :classed="pageItem.class"
+                :style="pageItem.style"
+                v-model:value="pageConfig.pageData[filId]"
+                :slots="pageItem.slots"
+                :attrs="pageItem.attrs"
+                :on="pageItem.on ? pageItem.on : {}"
+                :children="pageItem.children">
+            </component>
             <!--</el-col>-->
         </el-row>
     </div>
@@ -30,7 +31,7 @@
         }
     });
     //向所有子组件提供页面数据，并且是响应式
-    provide('pageData',reactive(props.pageConfig.pageData));
+    provide('pageData', reactive(props.pageConfig.pageData));
     // 计算排序后的pageDesc
     const computedPageDesc = computed(() => {
         let orderPageDesc = {};//排序后的页面描述
@@ -50,7 +51,6 @@
             return orderPageDesc
         }
     });
-
 
 </script>
 
