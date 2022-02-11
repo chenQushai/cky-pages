@@ -37,6 +37,8 @@
     const instance = ref(null);
     // 计算排序后的pageDesc
     const computedPageDesc = computed(() => {
+        //为pageConfig添加childrenInstance字段
+        Reflect.set(props.pageConfig,'childrenInstance',{});
         let orderPageDesc = {};//排序后的页面描述
         if (props.pageConfig.order && props.pageConfig.order.length) { //如果有order
             props.pageConfig.order.forEach((filId) => {

@@ -6,7 +6,6 @@
 
 <script>
     import HelloWorld from './components/HelloWorld.vue'
-    import {getCurrentInstance,inject} from 'vue'
     export default {
         name: 'App',
         components: {
@@ -25,10 +24,8 @@
                         key5: '66',
                         key6: '',
                         key7: [],
+                        key8: '',
                         key9: '子集'
-                    },
-                    childrenInstance: {
-
                     },
                     pageDesc: {
                         key: {
@@ -52,7 +49,6 @@
                             children: {
                                 key7: {
                                     type: 'cascader',
-                                    ref: 'yy',
                                     attrs: {
                                         size: "mini",
                                         filterable: true,
@@ -84,8 +80,14 @@
                                 }
                             }
                         },
+                        key8: {
+                            type: 'div',
+                            style: {
+                                minHeight: '80px'
+                            },
+                        }
                     },
-                    order: ['key', 'key1', 'key6'],//排序只针对与最外层同级元素
+                    // order: ['key', 'key1'],//排序只针对与最外层同级元素
                 }
             }
         },
@@ -99,7 +101,7 @@
         },
         mounted() {
             //拿到了实例方法
-            console.log(this.pageConfig.childrenInstance)
+            console.log(this.pageConfig)
         }
     }
 </script>
